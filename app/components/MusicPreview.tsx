@@ -69,7 +69,7 @@ export default function MusicPreview({ playlist }: MusicPreviewProps) {
 
     try {
       const resp = await axios.post(
-        "http://localhost:3001/download/start",
+        "https://ipatinga-downloader-server-production.up.railway.app/download/start",
         { tracks: tracksToSend },
         { headers: { "Content-Type": "application/json" } }
       );
@@ -89,7 +89,7 @@ export default function MusicPreview({ playlist }: MusicPreviewProps) {
 
   function listenEvents(id: string) {
     evtRef.current?.close();
-    evtRef.current = new EventSource(`http://localhost:3001/events/${id}`);
+    evtRef.current = new EventSource(`https://ipatinga-downloader-server-production.up.railway.app/events/${id}`);
 
     evtRef.current.addEventListener("progress", (e: MessageEvent) => {
       try {
@@ -139,7 +139,7 @@ export default function MusicPreview({ playlist }: MusicPreviewProps) {
 
   async function downloadZip(downloadUrl: string) {
     try {
-      const fullUrl = downloadUrl.startsWith("http") ? downloadUrl : `http://localhost:3001${downloadUrl}`;
+      const fullUrl = downloadUrl.startsWith("http") ? downloadUrl : `https://ipatinga-downloader-server-production.up.railway.app${downloadUrl}`;
       const resp = await axios.get(fullUrl, { responseType: "blob" });
       const cd = resp.headers["content-disposition"] || "";
       let filename = "playlist.zip";

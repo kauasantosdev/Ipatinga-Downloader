@@ -193,7 +193,7 @@ console.log(playlist)
       </div>
 
       <div className="flex gap-3">
-        <Button onClick={startJobAndListen} className="h-14 px-8 text-lg shadow-md transform transition-transform duration-150 hover:-translate-y-0.5 active:scale-98" disabled={running}>
+        <Button onClick={startJobAndListen} className="h-14 cursor-pointer px-8 text-[100%] shadow-md transform transition-transform duration-150 hover:-translate-y-0.5 active:scale-98" disabled={running}>
           {running ? "Processando..." : "Baixar playlist"}
         </Button>
         {showProgressUi && (

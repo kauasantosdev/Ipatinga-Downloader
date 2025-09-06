@@ -11,6 +11,7 @@ import axios from "axios";
 import qs from "qs";
 
 export function MusicDownloader() {
+ 
   const [alert, setAlert] = useState<"incorrectLink" | "emptyLink" | null>(null);
   const [url, setUrl] = useState<string>("");
   const [state, setState] = useState<"Form" | "Preview">("Form");
@@ -57,6 +58,15 @@ export function MusicDownloader() {
     }
   };
 
+  const handleClickPaste = async () => {
+   try {
+      const text = await navigator.clipboard.readText();
+      setUrl(text);
+    } catch (err) {
+      console.error("Não foi possível colar:", err);
+    }
+  }
+
   return (
     <div className="h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black relative overflow-hidden flex items-center justify-center px-4">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(29,78,216,0.2),transparent_70%)] animate-pulse" />
@@ -91,7 +101,9 @@ export function MusicDownloader() {
               <div className="text-left space-y-2">
                 <label className="text-md font-medium text-gray-200" htmlFor="urlInput">Link da playlist</label>
                 <div className="relative">
-                  <ClipboardPaste className="absolute cursor-pointer left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <ClipboardPaste
+                  onClick={handleClickPaste}
+                   className="absolute cursor-pointer left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <Input
                     autoComplete="off"
                     id="urlInput"
@@ -102,7 +114,8 @@ export function MusicDownloader() {
                   />
                 </div>
               </div>
-              <Button type="submit" className="w-full h-14 text-base font-semibold bg-primary hover:bg-primary/90 disabled:opacity-50 rounded-xl shadow-lg transition-all duration-200">
+              <Button type="submit"
+               className="w-full h-14 cursor-pointer text-base font-semibold bg-primary hover:bg-primary/90 disabled:opacity-50 rounded-xl shadow-lg transition-all duration-200">
                 Baixar Agora
               </Button>
             </div>

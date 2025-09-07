@@ -4,7 +4,7 @@ export default function App() {
   return (
     <div className="dark min-h-screen overflow-hidden bg-gray-900 text-white select-none">
       <div className="flex h-screen">
-       
+
        
         <div className="flex-1 flex flex-col overflow-hidden">
        
